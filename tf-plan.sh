@@ -11,21 +11,22 @@ fi
 
 s3_prefix=$1
 if [ -z "$s3_prefix" ]; then
-    echo "An s3 prefix must be provided! Failing out."
-    exit 1
+    s3_prefix="brick-new"
+    echo "No s3 prefix was passed in, using \"${s3_prefix}\" as the default"
 fi
 
 # Set target aws region
 target_aws_region=$2
 if [ -z "$target_aws_region" ]; then
-    target_aws_region=us-west-2
+    target_aws_region="us-east-1"
     echo "No region was passed in, using \"${target_aws_region}\" as the default"
 fi
 
 # Set public key
 public_key=$3
 if [ -z "$public_key" ]; then
-    public_key=~/.ssh/id_rsa.pub
+    # Public ssh key location on your local HD
+    public_key=~/.pems/PatientAlertKeys/pa_ssh_key.pub
     echo "No public key was passed in, using \"${public_key}\" as the default"
 fi
 # Check the key exists
